@@ -16,8 +16,8 @@ public class Client {
 		//生成动态代理对象
 		Subject proxyInstance = (Subject)Proxy.newProxyInstance(classLoader, new Class[]{Subject.class}, subjectHandler);
 
-		System.out.println(subject);
-		System.out.println(proxyInstance);
+//		System.out.println(subject);
+//		System.out.println(proxyInstance); //只要调用被代理的任何方法都会调用代理的封装 打印就是toString()
 		proxyInstance.play();
 
 	}
