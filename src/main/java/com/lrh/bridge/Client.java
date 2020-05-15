@@ -1,6 +1,8 @@
 package com.lrh.bridge;
 
 /**
+ *  桥接模式跟策略模式的区别在于 调用者和被调用者两边都能独立发展
+ *
  * @description:
  * @author: lrh
  * @date: 2020/5/15 15:46
