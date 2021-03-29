@@ -4,6 +4,8 @@
  */
 package com.combat.data.check.achieve.demo;
 
+import com.combat.data.check.achieve.CheckCondition;
+import com.combat.data.check.achieve.CheckerChain;
 import com.combat.data.check.achieve.repository.UserFromARepository;
 import com.combat.data.check.achieve.repository.UserFromBRepository;
 
@@ -14,10 +16,20 @@ import com.combat.data.check.achieve.repository.UserFromBRepository;
 public class ClientDemo {
 
     public static void main(String[] args) {
+        CheckerChain checkerChain = new CheckerChain();
         UserFromARepository userFromARepository = new UserFromARepository();
         UserFromBRepository userFromBRepository = new UserFromBRepository();
         UserSizeChecker userSizeChecker = new UserSizeChecker(userFromARepository, userFromBRepository);
         UserOneByOneChecker userOneByOneChecker = new UserOneByOneChecker(userFromARepository, userFromBRepository);
-        userSizeChecker.setNextDataChecker(userOneByOneChecker);
+        checkerChain.addChecker(userSizeChecker);
+        checkerChain.addChecker(userOneByOneChecker);
+
+        //执行
+        checkerChain.check(new CheckCondition() {
+            @Override
+            public String getDepartmentId() {
+                return null;
+            }
+        });
     }
 }
